@@ -1,28 +1,30 @@
 import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
+import { createStackNavigator } from 'react-navigation-stack';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import Login from './pages/Login'
 import Main from './pages/Main';
 import Pagar from './pages/Pagar';
 import Scan from './pages/Scan';
 import Produto from './pages/Produto';
-import Produtos from './pages/Produtos';
+import Configs from './pages/Configs';
 import Info from './pages/Info';
 
 const Routes = createAppContainer(
-  createBottomTabNavigator({
-      Login:{
-        screen: Login,
-        navigationOptions: {
-          tabBarVisible:false,
-        },
-      },
+
+  createMaterialBottomTabNavigator({
       Main: {
         screen: Main,
         navigationOptions: {
           title: 'Menu',
+          tabBarBadge:true,
+          /*tabBarIcon: ({ tintColor }) => (
+            <View>
+             <Icon style={[{color:tintColor}]} Size={25} name={'ios-home'}/> 
+            </View>
+          ),*/
         },
       },
       Pagar: {
@@ -31,10 +33,10 @@ const Routes = createAppContainer(
           title: 'Pagar',
         },
       },
-      Produto: {
-        screen: Produto,
+      Configs: {
+        screen: Configs,
         navigationOptions: {
-          title: 'Produto',
+          title: 'Configs',
         },
       },
       Scan: {
@@ -49,30 +51,27 @@ const Routes = createAppContainer(
           title: 'Info',
         },
       },
-    },  {
-          tabBarOptions: {
-            activeTintColor: '#202020',
-            labelStyle: {
-              fontSize: 12,
-            },
-            style: {
-              borderTopColor:'#383838',
-              borderTopWidth:2,
-              backgroundColor: '#ededed',
-            },
-          }
-        }
-    , {
-      defaultNavigationOptions: {
-        header: false,
-        headerTintColor: '#FFF',
-        headerBackTitleVisible: false,
-        headerStyle: {
-          backgroundColor: '#57A5AF',
+      Login:{
+        screen: Login,
+        navigationOptions: {
+          tabBarVisible:false,
+          title:''
         },
       },
-    }),
-    
+    },  {
+          labeled :true,
+          shifting : false,
+          initialRouteName: 'Login',
+          activeColor: '#202020',
+          inactiveColor: '#383838',
+
+          barStyle: {
+            borderTopColor:'#383838',
+            borderTopWidth:2,
+            backgroundColor: '#ededed',
+          },
+        }    
+    ),
 );
 
 export default Routes;
